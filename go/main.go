@@ -26,7 +26,18 @@ const OAUTH_DOMAIN = "example-labbit.us.auth0.com"
 const OAUTH_AUDIENCE = "urn:labbit.com:example:main_api"
 
 type GetByLabelRequest struct {
+	// Return entities that have label exactly equal to the given values
 	Values []string `json:"values"`
+
+	// includes "invalidated" entities (entities no longer available to be worked on, usually because
+	// they are disposed of or have already been used elsewhere
+	IncludeInvalid *bool `json:"includeInvalid,omitempty"`
+
+	// limit the get to entities whose type matches these types, if set
+	EntityTypes []string `json:"entityTypeIris,omitempty"`
+
+	// if excludesubtypes is true, entities must be the exact types and will ignore inheritance
+	ExcludeSubtypes *bool `json:"excludeSubtypes,omitempty"`
 }
 
 type SearchRequest struct {
